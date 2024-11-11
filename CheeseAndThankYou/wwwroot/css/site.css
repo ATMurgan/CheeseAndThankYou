@@ -1,3 +1,12 @@
+/*Google font*/
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.ubuntu-regular {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 html {
   font-size: 14px;
 }
@@ -19,4 +28,32 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: Ubuntu;
 }
+table.sortable th:hover{
+    cursor: pointer;
+}
+.navbar-light {
+    background-color: #FFA000;
+}
+a {
+    color: #7C4DFF;
+}
+a:hover {
+    color: #212121;
+}
+.btn-primary {
+    background-color: #7C4DFF;
+    color: #FFECB3;
+}
+    .btn-primary:hover {
+        background-color: #212121;
+        color: #FFECB3;
+    }
+li {
+    list-style-type: none;
+}
+.card {
+    text-align: center;
+}
+

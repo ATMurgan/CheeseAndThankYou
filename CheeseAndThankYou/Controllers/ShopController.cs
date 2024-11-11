@@ -1,43 +1,37 @@
-﻿using CheeseAndThankYou.Models;
+﻿using CheeseAndThankYou.Data;
+using CheeseAndThankYou.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheeseAndThankYou.Controllers
 {
     public class ShopController : Controller
     {
+        // db connection for all methods in controller
+        private readonly ApplicationDbContext _context;
+
+        // Constructor w/db connection dependency
+        public ShopController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
-            return View();
+            // Fecth list of categories & pass to view for display
+            var categories = _context.Categories.ToList();
+            return View(categories);
         }
 
         // GET: /Shop/ByCategory/5
         public IActionResult ByCategory(int id)
         {
-            switch (id)
+            // make sure we have a valid Category Id 
+            // Fetch list of products in seelcted category & pass to view
+            if (id == 0)
             {
-                case 1:
-                    ViewData["Category"] = "English";
-                    break;
-                case 2:
-                    ViewData["Category"] = "Soft";
-                    break;
-                case 3:
-                    ViewData["Category"] = "Hard";
-                    break;
-                case 4:
-                    ViewData["Category"] = "Blue";
-                    break;
-                default:
-                    return RedirectToAction("Index");
-            }
+                return RedirectToAction("Index");
 
-            // Use product model to make in-memory product list
-            var products = new List<Product>();
-
-            for (int i = 1; i < 15; i++)
-            {
-                products.Add(new Product { Name = ViewData["Category"] + " Cheese " + i });
             }
+            var products = _context.Products.Where(p => p.CategoryId == id).ToList();
 
          return View(products);
             
